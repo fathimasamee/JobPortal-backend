@@ -19,10 +19,12 @@ from django.urls import path
 from django.contrib import admin
 from django.urls import path,re_path
 from django.urls import re_path as url
-from jobAPI import authview
+
 
 from  rest_framework.authtoken.views import obtain_auth_token
 from jobAPI import registration
+from jobAPI import authview,userView
+from  rest_framework.authtoken.views import obtain_auth_token
 
 
 
@@ -30,4 +32,6 @@ urlpatterns = [
     re_path(r'^login$', authview.LoginApi),
     path('admin/', admin.site.urls),
 path('api/register/', registration.RegisterApi),
+
+    path('user/', userView.userViewSet.as_view()),
 ]

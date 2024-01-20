@@ -5,6 +5,8 @@ from django.contrib.auth.hashers import make_password
 from rest_framework.decorators import api_view, parser_classes
 from rest_framework.parsers import JSONParser
 from .serializer import UserSerializer, jobSeekerSerializer
+from jobAPI import authview
+from rest_framework.authtoken.views import Token
 from .models import JobSeeker  # Import your JobSeeker model here
 
 @api_view(['POST'])
@@ -37,6 +39,7 @@ def RegisterApi(request):
             job_seeker_serializer = jobSeekerSerializer(data=job_seeker_data)
             if job_seeker_serializer.is_valid():
                 job_seeker_serializer.save()
+                token, created = Token.objects.get_or_create(user=user_instance)
             else:
                 # Rollback the user creation if JobSeeker creation fails
                 user_instance.delete()
@@ -56,6 +59,7 @@ def RegisterApi(request):
             return JsonResponse({
                 "user": user_info,
                 "job_seeker": job_seeker_serializer.data,
+                "token": token.key,
                 "message": True,
             }, status=200)
 
