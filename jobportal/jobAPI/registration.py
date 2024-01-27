@@ -19,8 +19,7 @@ def RegisterApi(request):
         user_data = data.get('user', {})
         job_seeker_data = data.get('job_seeker', {})  # Assuming job_seeker is a nested object in your request
 
-
-
+        user_data['password']= make_password(user_data.get('password'))
 
 
         user_serializer = UserSerializer(data=user_data)
