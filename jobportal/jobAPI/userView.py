@@ -66,8 +66,8 @@ class userViewSet(APIView):
 
         if isValidToken:
             userId = isValidToken.id
-            user_data = request.data.get('user', {})
-            JobseekerData = request.data.get('jobseeker', {})
+            user_data = request.data.get('Userdata', {})
+            JobseekerData = request.data.get('JobseekerData', {})
             # return Response({"Userdata":reserverInstance.carNo})
 
             try:

@@ -20,7 +20,6 @@ class JobSeeker(models.Model):
     address = models.TextField()
     education = models.CharField(max_length=100)
     userId = models.ForeignKey(User, on_delete=models.CASCADE, related_name='jobseeker')
-    # user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='jobseeker')
 
 
 
